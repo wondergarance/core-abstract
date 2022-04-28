@@ -11,6 +11,7 @@
     <module>core</module>
     <module>core-legacy</module>
     <module>core-new</module>
+    <module>core-db</module>
   </modules>
 
   <parent>
@@ -47,13 +48,14 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>1.18.22</version>
       <optional>true</optional>
     </dependency>
     <dependency>
