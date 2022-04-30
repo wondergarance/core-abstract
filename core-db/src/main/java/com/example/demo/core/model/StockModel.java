@@ -1,26 +1,25 @@
 package com.example.demo.core.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.List;
 
 @Entity(name = "StockModel")
 @Table(name = "stock")
+@Data
 public class StockModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
+    private String name;
+
+    @Column
     private String shoes;
 
     @Column
     private int capacity;
-
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public Integer getId() {
         return id;
@@ -30,17 +29,20 @@ public class StockModel {
         this.id = id;
     }
 
-    public String getShoesJson() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShoes() {
         return shoes;
     }
 
-    public List<ShoeModel> getShoes() throws JsonProcessingException {
-        var shoes = objectMapper.readValue(this.shoes, ShoeModel[].class);
-        return Arrays.asList(shoes);
-    }
-
-    public void setShoesJson(List<ShoeModel> shoeList) throws JsonProcessingException {
-        this.shoes = objectMapper.writeValueAsString(shoeList);
+    public void setShoes(String shoes) {
+        this.shoes = shoes;
     }
 
     public int getCapacity() {

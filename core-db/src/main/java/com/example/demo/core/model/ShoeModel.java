@@ -2,7 +2,6 @@ package com.example.demo.core.model;
 
 import javax.persistence.Entity;
 
-@Entity
 public class ShoeModel {
     private String color;
     private int size;

@@ -1,10 +1,15 @@
 package com.example.demo.core;
 
-import com.example.demo.dto.in.Stock;
+import com.example.demo.dto.out.ExtendedShoe;
+import com.example.demo.dto.out.Stock;
+
+import java.util.List;
 
 public interface StockCore {
 
-    Stock.State getStockState();
+    Stock.State getStockState(String name);
 
-    void updateStock(Stock stock);
+    Stock getStock(String name);
+
+    Stock updateStock(String name, List<ExtendedShoe> shoes);
 }

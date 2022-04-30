@@ -10,11 +10,11 @@ import java.util.Map;
 public class StockFacade {
     private final Map<Integer, StockCore> implementations = new HashMap<>();
 
-    public StockCore get(Integer version){
+    public StockCore get(Integer version) {
         return implementations.get(version);
     }
 
-    public void register(Integer version, StockCore implementation){
+    public void register(Integer version, StockCore implementation) {
         this.implementations.put(version, implementation);
     }
 

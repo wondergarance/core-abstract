@@ -1,15 +1,29 @@
 package com.example.demo.dto.out;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ExtendedShoe {
-    Shoe shoe;
+    @JsonProperty("color")
+    Color color;
+    @JsonProperty("size")
+    int size;
+    @JsonProperty("quantity")
     int quantity;
 
-    public Shoe getShoe() {
-        return shoe;
+    public Color getColor() {
+        return color;
     }
 
-    public void setShoe(Shoe shoe) {
-        this.shoe = shoe;
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public int getQuantity() {
@@ -18,5 +32,13 @@ public class ExtendedShoe {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public enum Color{
+
+        BLACK,
+        BLUE,
+        ;
+
     }
 }
