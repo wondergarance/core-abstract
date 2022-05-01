@@ -10,6 +10,14 @@ public class ExtendedShoe {
     @JsonProperty("quantity")
     int quantity;
 
+    public ExtendedShoe() {}
+
+    public ExtendedShoe(Color color, int size, int quantity) {
+        this.color = color;
+        this.size = size;
+        this.quantity = quantity;
+    }
+
     public Color getColor() {
         return color;
     }

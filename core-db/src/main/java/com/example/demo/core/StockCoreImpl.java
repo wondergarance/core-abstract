@@ -3,13 +3,11 @@ package com.example.demo.core;
 import com.example.demo.core.service.StockService;
 import com.example.demo.dto.out.ExtendedShoe;
 import com.example.demo.dto.out.Stock;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Implementation(version = 3)
-@RequiredArgsConstructor
+@Implementation(version = 2)
 public class StockCoreImpl extends AbstractStockCore {
 
     @Autowired

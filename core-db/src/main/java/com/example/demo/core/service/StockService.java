@@ -1,21 +1,26 @@
 package com.example.demo.core.service;
 
-import com.example.demo.core.model.ShoeModel;
 import com.example.demo.core.model.StockModel;
 import com.example.demo.core.repository.StockRepository;
 import com.example.demo.dto.out.ExtendedShoe;
 import com.example.demo.dto.out.Stock;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
 import java.util.*;
 
 @Service
 public class StockService {
+
     @Autowired
     private StockRepository stockRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -32,7 +37,12 @@ public class StockService {
         var stockModel = stockRepository.findByName(name).orElse(null);
         if (stockModel != null) {
             updateStockModel(shoes, stockModel);
-            stockRepository.save(stockModel);
+            try {
+                stockRepository.save(stockModel);
+            } catch (ConstraintViolationException e) {
+                LOGGER.error("Capacity of shoes exceeds the limit (0-30)", e);
+                throw new IllegalArgumentException(e);
+            }
         }
 
         return getStock(name);
@@ -49,7 +59,7 @@ public class StockService {
                         .state(getState(shoes))
                         .build();
             } catch (JsonProcessingException e) {
-
+                LOGGER.error("Json convert error", e);
             }
         }
         return null;
@@ -87,10 +97,11 @@ public class StockService {
             for (ExtendedShoe shoe : shoes) {
                 ExtendedShoe dbShoe = getShoeByfields(dbShoes, shoe.getColor(), shoe.getSize());
                 if (dbShoe != null) {
-                    int quantity = shoe.getQuantity();
-                    // TODO validate max capacity
-                    if (quantity > 30) {
-                        throw new IllegalArgumentException("Shoe's quantity exceeds 30!");
+                    var quantity = shoe.getQuantity();
+                    if (quantity < 0) {
+                        var message = "The minimum capacity of shoes is 0";
+                        LOGGER.error(message);
+                        throw new IllegalArgumentException(message);
                     }
                     dbShoe.setQuantity(quantity);
                 }
@@ -98,14 +109,11 @@ public class StockService {
 
             var dbShoesStr = convertToShoesJsonStr(dbShoes);
             var capacity = getCapacity(dbShoes);
-            if (capacity > 30) {
-                throw new IllegalArgumentException("Stock capacity exceeds 30!");
-            }
 
             stockModel.setShoes(dbShoesStr);
             stockModel.setCapacity(capacity);
         } catch (JsonProcessingException e) {
-
+            LOGGER.error("Json convert error", e);
         }
     }
 

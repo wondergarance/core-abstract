@@ -4,7 +4,6 @@ import com.example.demo.dto.out.ExtendedShoe;
 import com.example.demo.dto.out.Stock;
 import com.example.demo.facade.StockFacade;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class StockController {
 
     private final StockFacade stockFacade;
 
-    @GetMapping(path = "/info")
+    @GetMapping
     public ResponseEntity<Stock> getStock(@RequestParam String name, @RequestHeader Integer version) {
         return ResponseEntity.ok(stockFacade.get(version).getStock(name));
     }
@@ -29,10 +28,10 @@ public class StockController {
         return ResponseEntity.ok(stockFacade.get(version).getStockState(name));
     }
 
-    @PatchMapping(path = "/stock", consumes = { "application/json" })
+    @PatchMapping(consumes = { "application/json" })
     public ResponseEntity<Stock> updateStock(@RequestParam String name,
-                                            @RequestBody List<ExtendedShoe> shoes,
-                                            @Valid @RequestHeader Integer version) {
+                                             @Valid @RequestBody List<ExtendedShoe> shoes,
+                                             @RequestHeader Integer version) {
         return ResponseEntity.ok(stockFacade.get(version).updateStock(name, shoes));
     }
 }
