@@ -375,6 +375,36 @@ which should answer (see `com.example.demo.core.ShoeCoreNew.search`):
 {"shoes":[{"name":"New shoe","size":2,"color":"BLACK"}]}
 ```
 
+## Version 2 with database storage
+
+The module core-db is in the repo https://github.com/wondergarance/core-db
+
+To get all info of the stock, you can call:
+```shell script
+curl -X GET "http://localhost:8080/stock?name=sport" -H "version: 2"
+```
+To get the state of the stock, you can call:
+```shell script
+curl -X GET "http://localhost:8080/stock/state?name=sport" -H "version: 2"
+```
+To update the stock with one shoe model, you can call:
+```shell script
+curl -X PATCH "http://localhost:8080/stock?name=sport" -H "version: 2" -H "Content-Type: application/json" -d '[{"color": "BLACK","size": 41,"quantity": 5}]'
+```
+
+You can run more tests with these commands:
+```shell script
+cd core-abstract
+```
+* Success cases
+```shell script
+./controller/src/test/resources/test_cases_ok.sh > test_cases_ok_result.log
+```
+* Error cases
+```shell script
+./controller/src/test/resources/test_cases_error.sh > test_cases_ko_result.log
+```
+
 # Conclusion
 
 We can see that both result are structurally identical, while the code is obviously different.
