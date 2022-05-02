@@ -14,6 +14,7 @@
 - [Validating the application](#validating-the-application)
   - [Version 1](#version-1)
   - [Version 2](#version-2)
+  - [Version 2 with database storage](#version-2-with-database-storage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
