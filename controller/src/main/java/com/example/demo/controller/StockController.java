@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.out.ExtendedShoe;
+import com.example.demo.dto.out.StockShoe;
 import com.example.demo.dto.out.Stock;
 import com.example.demo.facade.StockFacade;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class StockController {
 
     @PatchMapping(consumes = { "application/json" })
     public ResponseEntity<Stock> updateStock(@RequestParam String name,
-                                             @Valid @RequestBody List<ExtendedShoe> shoes,
+                                             @Valid @RequestBody List<StockShoe> shoes,
                                              @RequestHeader Integer version) {
         return ResponseEntity.ok(stockFacade.get(version).updateStock(name, shoes));
     }

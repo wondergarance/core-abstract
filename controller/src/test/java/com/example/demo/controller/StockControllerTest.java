@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.core.service.StockService;
-import com.example.demo.dto.out.ExtendedShoe;
+import com.example.demo.dto.out.StockShoe;
 import com.example.demo.dto.out.Stock;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class StockControllerTest {
 
     @Before
     public void setUp() {
-        ExtendedShoe shoe = new ExtendedShoe(ExtendedShoe.Color.BLACK, 41, 0);
+        StockShoe shoe = new StockShoe(StockShoe.Color.BLACK, 41, 0);
         this.stock = Stock.builder()
                 .name(name)
                 .state(Stock.State.SOME)

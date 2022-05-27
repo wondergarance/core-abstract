@@ -2,7 +2,7 @@ package com.example.demo.dto.out;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ExtendedShoe {
+public class StockShoe {
     @JsonProperty("color")
     Color color;
     @JsonProperty("size")
@@ -10,9 +10,9 @@ public class ExtendedShoe {
     @JsonProperty("quantity")
     int quantity;
 
-    public ExtendedShoe() {}
+    public StockShoe() {}
 
-    public ExtendedShoe(Color color, int size, int quantity) {
+    public StockShoe(Color color, int size, int quantity) {
         this.color = color;
         this.size = size;
         this.quantity = quantity;
